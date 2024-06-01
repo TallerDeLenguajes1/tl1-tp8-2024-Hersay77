@@ -1,4 +1,4 @@
-﻿using RecursosParaManejarTareas;
+﻿/*using RecursosParaManejarTareas;
 
 //1. Cree aleatoriamente N tareas pendientes.
 Random random = new Random(); //nueva instancia de objeto random
@@ -156,7 +156,8 @@ do
         Console.WriteLine("Opcion Incorrecta vuelva a ingresar");
     }
 } while (opcion != 6);
+*/
 
+//Ejercicio-2
 
-    
 
