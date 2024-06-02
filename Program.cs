@@ -165,7 +165,9 @@ using EspacioCalculadora;
 using EspacioTipoOperacion;
 
 
-MiCalculadora MiCalculadora = new MiCalculadora(); 
+MiCalculadora MiCalculadora = new MiCalculadora(); //creo una instancia del objeto MiCalculadora
+MiCalculadora.Historial = new List<Operacion>(); //creo una lista de operaciones
+
 int opcion = 0;
 do
 {
@@ -177,12 +179,13 @@ do
     Console.WriteLine("# 3 - MULTIPLICAR              #");
     Console.WriteLine("# 4 - DIVIDIR                  #");
     Console.WriteLine("# 5 - LIMPIAR                  #");
+    Console.WriteLine("# 6 - HISTORIAL                #");
     Console.WriteLine("################################");
     Console.WriteLine("Ingrese una opcion: ");
 
     if (int.TryParse(Console.ReadLine(), out opcion))
     {
-        double valor;
+        double valor, resultadoAnterior = MiCalculadora.Resultado;
         switch (opcion)
         {
             case 1:
@@ -191,6 +194,7 @@ do
                 {
                     MiCalculadora.Sumar(valor);
                     Console.WriteLine($"Se sumo el valor: {valor}. El resultado es: {MiCalculadora.Resultado}");
+                    MiCalculadora.Historial.Add(new Operacion(resultadoAnterior, MiCalculadora.Resultado, TipoOperacion.Suma)); //agrego una operacion al historial
                 }
                 else
                 {
@@ -203,6 +207,7 @@ do
                 {
                     MiCalculadora.Restar(valor);
                     Console.WriteLine($"Se resto el valor: {valor}. El resultado es: {MiCalculadora.Resultado}");
+                    MiCalculadora.Historial.Add(new Operacion(resultadoAnterior, MiCalculadora.Resultado, TipoOperacion.Resta)); //agrego una operacion al historial
                 }
                 else
                 {
@@ -215,6 +220,7 @@ do
                 {
                     MiCalculadora.Multiplicar(valor);
                     Console.WriteLine($"Se multiplico el valor: {valor}. El resultado es: {MiCalculadora.Resultado}");
+                    MiCalculadora.Historial.Add(new Operacion(resultadoAnterior, MiCalculadora.Resultado, TipoOperacion.Multiplicacion)); //agrego una operacion al historial
                 }
                 else
                 {
@@ -229,6 +235,7 @@ do
                     {
                         MiCalculadora.Dividir(valor);
                         Console.WriteLine($"Se dividio por {valor}. El resultado es: {MiCalculadora.Resultado}");
+                        MiCalculadora.Historial.Add(new Operacion(resultadoAnterior, MiCalculadora.Resultado, TipoOperacion.Division)); //agrego una operacion al historial
                     }
                     else
                     {
@@ -243,6 +250,14 @@ do
             case 5:
                 MiCalculadora.Limpiar();
                 Console.WriteLine($"Se limpio el resultado: {MiCalculadora.Resultado}");
+                MiCalculadora.Historial.Add(new Operacion(resultadoAnterior, MiCalculadora.Resultado, TipoOperacion.Limpiar)); //agrego una operacion al historial
+            break;
+            case 6:
+                Console.WriteLine("########  HISTORIAL DE OPERACIONES  #########"); 
+                foreach (var op in MiCalculadora.Historial) //recorro la lista
+                {
+                    Console.WriteLine(op.ShowOperacion()); //muestro operacion con el metodo de cada op
+                }
             break;
             default:
             break;

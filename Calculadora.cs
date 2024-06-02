@@ -1,3 +1,4 @@
+using espacioOperacion;
 namespace EspacioCalculadora
 {
 
@@ -8,6 +9,10 @@ namespace EspacioCalculadora
         public double Resultado{
             get => dato;
         }
+
+        private List<Operacion> historial; //declaro un miembro para el historial
+
+        public List<Operacion> Historial { get => historial; set => historial = value; } //propiedades de acceso al historial
 
         public void Sumar(double x){
             dato+=x;
@@ -27,5 +32,7 @@ namespace EspacioCalculadora
         public void Limpiar(){
             dato = 0;
         }
+
+        
     }
 }
